@@ -69,16 +69,6 @@ namespace OrderItemsReserver
                 await sender.SendEmailAsync(myQueueItem);
             }
 
-            /*// Execute a function returning a result
-            var result = Policy
-                .Handle<InvalidDataException>()
-                .Or<Exception>()
-                .Retry(3, (exception, retryCount, context) =>
-                {
-                    log.Log(LogLevel.Critical, exception, $"Retry count: {retryCount}");
-                })
-                .Execute(() => service.CreateOrderFile(myQueueItem, log));*/
-
             await queueClient.CloseAsync();
         }
 

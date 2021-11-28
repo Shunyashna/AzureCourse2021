@@ -66,33 +66,8 @@ namespace Microsoft.eShopWeb.ApplicationCore.Services
 
             this.CreateOrderMessage(basket.Items.Select(basketItem => new OrderDetails
                 {ItemId = basketItem.CatalogItemId, Quantity = basketItem.Quantity}));
-
-            //this.CreateOrderBlob(basket.Items.Select(basketItem => new OrderDetails
-            //    {ItemId = basketItem.CatalogItemId, Quantity = basketItem.Quantity}), _endpoints.BlobFunction);
-
-            //this.PersistOrder(order, _endpoints.CosmosDbFunction);
-        }
-
-        private void CreateOrderBlob(IEnumerable<OrderDetails> details, string endpoint)
-        {
-            RestClient client = new RestClient(endpoint);
-
-            RestRequest request = new RestRequest
-            {
-                Method = Method.POST,
-                RequestFormat = DataFormat.Json
-            };
-
-            if (details != null && details.Any())
-            {
-                request.AddJsonBody(
-                    new
-                    {
-                        Orders = details
-                    });
-            }
-
-            client.Execute(request);
+            
+            this.PersistOrder(order, _endpoints.CosmosDbFunction);
         }
 
         private void PersistOrder(Order order, string endpoint)
