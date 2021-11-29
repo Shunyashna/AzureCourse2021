@@ -9,14 +9,14 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
-WORKDIR /src
+WORKDIR /AzureCourse2021
 COPY ["src/PublicApi/PublicApi.csproj", "src/PublicApi/"]
 COPY ["src/ApplicationCore/ApplicationCore.csproj", "src/ApplicationCore/"]
 COPY ["src/BlazorShared/BlazorShared.csproj", "src/BlazorShared/"]
 COPY ["src/Infrastructure/Infrastructure.csproj", "src/Infrastructure/"]
 RUN dotnet restore "src/PublicApi/PublicApi.csproj"
 COPY . .
-WORKDIR "/src/src/PublicApi"
+WORKDIR "/AzureCourse2021/src/PublicApi"
 RUN dotnet build "PublicApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
