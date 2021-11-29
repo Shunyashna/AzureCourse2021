@@ -7,10 +7,10 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using OrderPersister.Models;
-using OrderPersister.Services;
+using DeliveryOrderProcessor.Models;
+using DeliveryOrderProcessor.Services;
 
-namespace OrderPersister
+namespace DeliveryOrderProcessor
 {
     public static class CreateOrderFunction
     {

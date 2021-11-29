@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Ardalis.GuardClauses;
 using Microsoft.eShopWeb.ApplicationCore.Entities;
 using Microsoft.eShopWeb.ApplicationCore.Entities.BasketAggregate;
@@ -13,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.eShopWeb.ApplicationCore.Models;
 using Microsoft.Azure.ServiceBus;
 using System.Text.Json;
+
 
 namespace Microsoft.eShopWeb.ApplicationCore.Services
 {
@@ -67,10 +67,10 @@ namespace Microsoft.eShopWeb.ApplicationCore.Services
             this.CreateOrderMessage(basket.Items.Select(basketItem => new OrderDetails
                 {ItemId = basketItem.CatalogItemId, Quantity = basketItem.Quantity}));
             
-            this.PersistOrder(order, _endpoints.CosmosDbFunction);
+            PersistOrder(order, _endpoints.CosmosDbFunction);
         }
 
-        private void PersistOrder(Order order, string endpoint)
+        private static void PersistOrder(Order order, string endpoint)
         {
             RestClient client = new RestClient(endpoint);
 

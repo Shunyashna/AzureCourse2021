@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.Azure.Cosmos;
-using OrderPersister.Models;
+using DeliveryOrderProcessor.Models;
 
-namespace OrderPersister.Services
+namespace DeliveryOrderProcessor.Services
 {
     public class PersistOrderService
     {

@@ -1,4 +1,4 @@
-﻿namespace OrderPersister.Models
+﻿namespace DeliveryOrderProcessor.Models
 {
     public class Address
     {

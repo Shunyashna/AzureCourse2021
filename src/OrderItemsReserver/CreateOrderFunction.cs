@@ -71,24 +71,5 @@ namespace OrderItemsReserver
 
             await queueClient.CloseAsync();
         }
-
-        /*[FunctionName("CreateOrder")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
-            ILogger log)
-        {
-            var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var orderDetails = JsonConvert.DeserializeObject<OrderDetailsRequest>(requestBody);
-
-            if (orderDetails?.Orders == null || !orderDetails.Orders.Any())
-            {
-                return new BadRequestResult();
-            }
-
-            var service = new OrderBlobService();
-            await service.CreateOrderFile(requestBody);
-            
-            return new OkResult();
-        }*/
     }
 }
