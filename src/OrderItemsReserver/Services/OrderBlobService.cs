@@ -16,7 +16,7 @@ namespace OrderItemsReserver.Services
         public Response<BlobContentInfo> CreateOrderFile(string data, ILogger logger)
         {
             var connectionString =
-                "1DefaultEndpointsProtocol=https;AccountName=course2021storageaccount;AccountKey=AI7aRS/QKssHU/tQOjhafNjuLUcS2fYrBDR4DZEBizY0iSTD9b37aqYc9KncV97FTrM3eCXJlqCgN064tdxqCA==;EndpointSuffix=core.windows.net";
+                "DefaultEndpointsProtocol=https;AccountName=azurecourse2021cosmosdba;AccountKey=1HZJVhBAGgJPIc0br5VAf9HGrSuSaNrWBLRbI8qqATqyybRBUadlJXyPXk/KLfYH4cgLKGePXbFs1YOe6fEqzA==;EndpointSuffix=core.windows.net";
             var containerName = "orders";
 
             BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);

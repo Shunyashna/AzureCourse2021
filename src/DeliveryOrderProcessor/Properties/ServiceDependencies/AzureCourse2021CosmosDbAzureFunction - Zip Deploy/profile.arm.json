@@ -21,7 +21,7 @@
     },
     "resourceName": {
       "type": "string",
-      "defaultValue": "AzureCourse2021AzureFunction",
+      "defaultValue": "AzureCourse2021CosmosDbAzureFunction",
       "metadata": {
         "description": "Name of the main resource to be created by this template."
       }

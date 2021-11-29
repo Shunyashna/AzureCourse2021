@@ -1,4 +1,7 @@
-﻿using SendGrid;
+﻿using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
 
@@ -6,16 +9,34 @@ namespace OrderItemsReserver.Services
 {
     public class EmailSender
     {
-        private string ApiKey { get; }
+        private string SendGridApiKey { get; }
+        private string LogicAppUrl { get; }
 
-        public EmailSender(string apiKey)
+        public EmailSender(string sendGridApiKey, string logicAppUrl)
         {
-            ApiKey = apiKey;
+            SendGridApiKey = sendGridApiKey;
+            LogicAppUrl = logicAppUrl;
         }
 
         public Task SendEmailAsync(string order)
         {
-            var client = new SendGridClient(this.ApiKey);
+            var client = new HttpClient();
+
+            var jsonData = JsonSerializer.Serialize(new
+            {
+                email = "dado1481@gmail.com",
+                subject = "Unsuccessful Order Creation",
+                content = $"The following order can not be created in the blob: {order}"
+            });
+
+            return client.PostAsync(
+                this.LogicAppUrl,
+                new StringContent(jsonData, Encoding.UTF8, "application/json"));
+        }
+
+        public Task SendEmailSendGridAsync(string order)
+        {
+            var client = new SendGridClient(this.SendGridApiKey);
 
             var messageText = $"The following order can not be created in the blob: {order}";
 

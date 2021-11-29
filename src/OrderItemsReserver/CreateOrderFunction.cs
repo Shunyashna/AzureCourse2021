@@ -1,8 +1,5 @@
 using System;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Storage.Blobs.Models;
@@ -12,7 +9,6 @@ using Newtonsoft.Json;
 using OrderItemsReserver.Models;
 using OrderItemsReserver.Services;
 using Microsoft.Azure.ServiceBus;
-using Polly;
 
 namespace OrderItemsReserver
 {
@@ -39,7 +35,7 @@ namespace OrderItemsReserver
             var service = new OrderBlobService();
 
             var retryCounter = 3;
-            Response<BlobContentInfo> result = null;
+            Response<BlobContentInfo> result;
 
             while (retryCounter > 0)
             {
@@ -65,7 +61,8 @@ namespace OrderItemsReserver
             {
                 // Send to email
                 log.Log(LogLevel.Critical, $"Sending the email.");
-                var sender = new EmailSender("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");
+                var sender = new EmailSender(Environment.GetEnvironmentVariable("SendGridApiKey"),
+                    Environment.GetEnvironmentVariable("LogicAppUrl"));
                 await sender.SendEmailAsync(myQueueItem);
             }
 
